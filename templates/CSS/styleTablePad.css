@@ -1,0 +1,32 @@
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-custom th, .table-custom td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd; /* Borda sutil */
+}
+
+.table-custom th {
+    background-color: #00BFFF;
+    text-align: center;
+}
+
+.table-custom tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-custom tr:hover {
+    background-color: #ddd;
+}
+
+.table-custom td a {
+    color: #00BFFF;
+    text-decoration: none;
+}
+
+.table-custom td a:hover {
+    text-decoration: underline;
+}
