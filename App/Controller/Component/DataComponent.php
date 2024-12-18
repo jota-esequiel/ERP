@@ -12,7 +12,7 @@ class DataComponent {
         $port = '5432';    
     
         if (is_null($bd)) {
-            $bd = 'UNIFOOD'; 
+            $bd = 'ERP'; 
         }
     
         try {

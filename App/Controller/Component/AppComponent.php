@@ -217,7 +217,7 @@ class AppComponent {
         if (is_array($subMenu)) {
             echo '<ul class="navbar">';  
             foreach ($subMenu as $item) {
-                $url = "/UniFood/" . strtolower($item['controller']) . "/" . strtolower($item['action']);
+                $url = "/ERP/" . strtolower($item['controller']) . "/" . strtolower($item['action']);
                 echo '<li class="menu-item"><a href="' . $url . '">' . $item['desc'] . '</a></li>';
             }
             echo '</ul>';
@@ -286,7 +286,7 @@ class AppComponent {
                     if ($acoes) {
                         echo '<td>';
                         foreach ($acoes as $acao) {
-                            $url = "/UniFood/" . strtolower($acao['controller']) . "/" . $acao['action'] . "/" . $rowResult[$acao['cmp']];
+                            $url = "/ERP/" . strtolower($acao['controller']) . "/" . $acao['action'] . "/" . $rowResult[$acao['cmp']];
                             echo "<a href='$url'><i class='{$acao['icon']}'></i></a> ";
                         }
                         echo '</td>';
@@ -312,7 +312,7 @@ class AppComponent {
 
         unset($params['controller'], $params['action']);
         
-        $url = "/UniFood/{$controller}/{$action}";
+        $url = "/ERP/{$controller}/{$action}";
 
         if (!empty($params)) {
             $url .= '/' . implode('/', $params);

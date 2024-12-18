@@ -9,7 +9,7 @@ class Categorias {
     public function __construct()
     {
         $this->Data = new DataComponent();
-        $this->Data->bdConnect('UNIFOOD');
+        $this->Data->bdConnect('ERP');
     }
 
     public function sqlVisualizar() {

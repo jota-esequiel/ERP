@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /UniFood/
+RewriteBase /ERP/
 
 # Redireciona todas as requisições para index.php, exceto arquivos e diretórios existentes
 RewriteCond %{REQUEST_FILENAME} !-f

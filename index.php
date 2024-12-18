@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniFood</title>
+    <title>ERP</title>
 
     <?php 
-        require '../UniFood/vendor/autoload.php';
-        require '../UniFood/App/Config/config.php';
+        require '../ERP/vendor/autoload.php';
+        require '../ERP/App/Config/config.php';
 
         use App\Core\AssetManager;
 
