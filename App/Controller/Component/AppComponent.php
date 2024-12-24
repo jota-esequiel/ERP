@@ -8,14 +8,17 @@ namespace App\Controller\Component;
 use App\Controller\Component\DataComponent;
 use App\Controller\Component\HoldComponent;
 use App\Controller\Component\FlashComponent;
+use App\Controller\Component\UserAuthComponent;
 
 class AppComponent {
     public $Data;
     public $Hold;
+    public $UserAuth;
 
     public function __construct() {
         $this->Data = new DataComponent;
         $this->Hold = new HoldComponent();
+        $this->UserAuth = new UserAuthComponent();
     }
 
     /**

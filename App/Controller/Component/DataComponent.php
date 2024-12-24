@@ -35,7 +35,7 @@ class DataComponent {
         }
     }
 
-    public function bdQueryFetchAll($strQuery) {
+    public function bdQueryFetchAll($strQuery, $trim) {
         try {
             $strPdo = $this->bdConnect();
             $strStmt = $strPdo->prepare($strQuery);
@@ -46,6 +46,10 @@ class DataComponent {
     
             $strStmt->execute();
             $strResult = $strStmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            if($trim === true) {
+                $var = trim($strStmt);
+            }
     
             return $strResult;
     
