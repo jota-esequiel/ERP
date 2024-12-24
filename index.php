@@ -6,6 +6,7 @@
     <title>ERP</title>
 
     <?php 
+        // die("O sistema está em manutenção! Por favor, aguarde!");
         require '../ERP/vendor/autoload.php';
         require '../ERP/App/Config/config.php';
 
