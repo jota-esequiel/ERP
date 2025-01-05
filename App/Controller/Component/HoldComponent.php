@@ -212,5 +212,101 @@ class HoldComponent {
             throw new \InvalidArgumentException('Verifique o se ' . $redirect['url'] . ' está correto!');
         }
     }
+
+
+    /**
+     * @author João Vitor Esequiel Vieira
+     * @param string $strPdo Banco de Dados
+     * @param string $operador Operação a ser executada (INSERT, UPDATE, DELETE)
+     * @param string $bdTable Tabela do Banco de Dados
+     * @param array  $cmps Campos renderizados
+     * @param array  $conditions Cláusula Where
+     */
+    public function comandosBd($strPdo, $operador, $bdTable, $cmps = [], $conditions = []) {
+        switch ($operador) {
+            case 'INSERT':
+                $bdObj = $this->Data->bdConnect($strPdo);
+                $cmpsValue = implode(', ', array_keys($cmps));
+                $bindValue = ':' . implode(', :', array_keys($cmps));
+
+                $strInsert = "INSERT INTO $bdTable ($cmpsValue) VALUES ($bindValue)";
+    
+                try {
+                    $strStmt = $bdObj->prepare($strInsert);
+    
+                    foreach ($cmps as $keys => $cmpsKeys) {
+                        $strStmt->bindValue(":$keys", $cmpsKeys);
+                    }
+    
+                    return $strStmt->execute();
+                } catch (\PDOException) {
+                    echo "Ocorreu um problema ao fazer a inserção na tabela '$bdTable'!";
+                    return false;
+                }
+    
+            case 'UPDATE':
+                $bdObj = $this->Data->bdConnect($strPdo);
+    
+                $setParts = [];
+                foreach (array_keys($cmps) as $key) {
+                    $setParts[] = "$key = :$key";
+                }
+                $setClause = implode(', ', $setParts);
+    
+                $whereParts = [];
+                foreach (array_keys($conditions) as $key) {
+                    $whereParts[] = "$key = :$key";
+                }
+                $whereClause = implode(' AND ', $whereParts);
+    
+                $strUpdate = " UPDATE $bdTable SET $setClause WHERE $whereClause ";
+    
+                try {
+                    $strStmt = $bdObj->prepare($strUpdate);
+    
+                    foreach ($cmps as $key => $value) {
+                        $strStmt->bindValue(":$key", $value);
+                    }
+    
+                    foreach ($conditions as $key => $value) {
+                        $strStmt->bindValue(":$key", $value);
+                    }
+    
+                    return $strStmt->execute();
+                } catch (\PDOException) {
+                    echo "Ocorreu um problema ao fazer a atualização na tabela '$bdTable'!";
+                    return false;
+                }
+    
+            case 'DELETE':
+                $bdObj = $this->Data->bdConnect($strPdo);
+    
+                $whereParts = [];
+                foreach (array_keys($conditions) as $key) {
+                    $whereParts[] = "$key = :$key";
+                }
+                $whereClause = implode(' AND ', $whereParts);
+    
+                $strDelete = "DELETE FROM $bdTable WHERE $whereClause";
+    
+                try {
+                    $strStmt = $bdObj->prepare($strDelete);
+    
+                    foreach ($conditions as $key => $value) {
+                        $strStmt->bindValue(":$key", $value);
+                    }
+    
+                    return $strStmt->execute();
+                } catch (\PDOException) {
+                    echo "Ocorreu um problema ao deletar registros da tabela '$bdTable'!";
+                    return false;
+                }
+    
+            default:
+                echo "Operador '$operador' não suportado!";
+                return false;
+        }
+    }
+    
 }
 ?>

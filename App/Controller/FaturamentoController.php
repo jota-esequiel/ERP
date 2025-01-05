@@ -40,6 +40,7 @@ use App\Controller\GenericosController;
      public function index() {
         $this->Data->bdConnect();
 
-        $teste = $this->Genericos->search('getUsersErp');
+        echo "Boa tarde";
+        // $teste = $this->Genericos->search('getUsersErp');
      }
 }
